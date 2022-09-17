@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service
 import java.math.BigInteger
 
 @Service
-class ItemMapperService {
+class ItemMapperService : ItemMapperServiceInterface {
 
-    fun mapItemModelInBulk(dtoList: MutableList<ItemDTOInterface>): MutableList<ItemModel> {
+    override fun mapItemModelInBulk(dtoList: MutableList<ItemDTOInterface>): MutableList<ItemModel> {
         val returnList = emptyList<ItemModel>().toMutableList()
 
         var idCounter = BigInteger.ZERO
@@ -22,7 +22,7 @@ class ItemMapperService {
         return returnList
     }
 
-    fun mapItemModel(input: ItemDTOInterface, id: BigInteger): ItemModel {
+    override fun mapItemModel(input: ItemDTOInterface, id: BigInteger): ItemModel {
         val itemModel = ItemModel(id.toString())
 
         input.getName()?.let { itemModel.setName(it.trim()) }
@@ -43,7 +43,7 @@ class ItemMapperService {
         return itemModel
     }
 
-    fun mapItemDTOInBulk(databaseEntries: MutableList<ItemModel>): MutableList<ItemDTOInterface> {
+    override fun mapItemDTOInBulk(databaseEntries: MutableList<ItemModel>): MutableList<ItemDTOInterface> {
         val returnList = emptyList<ItemDTOInterface>().toMutableList()
 
         databaseEntries.forEach {
@@ -54,7 +54,7 @@ class ItemMapperService {
         return returnList
     }
 
-    fun mapItem(itemModel: ItemModel): ItemDTOInterface {
+    override fun mapItem(itemModel: ItemModel): ItemDTOInterface {
         val returnModel = ItemDTO()
 
         when (itemModel.getName() != null) {

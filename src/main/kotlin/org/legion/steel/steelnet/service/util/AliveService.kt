@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class AliveService {
+class AliveService : AliveServiceInterface {
 
-    public fun createAliveStats(): ResponseEntity<AliveStats> {
+    override fun createAliveStats(): ResponseEntity<AliveStats> {
         val stats = AliveStats()
         return ResponseEntity.ok(stats)
     }

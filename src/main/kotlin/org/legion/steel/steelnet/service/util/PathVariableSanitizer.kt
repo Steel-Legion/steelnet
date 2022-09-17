@@ -2,10 +2,10 @@ package org.legion.steel.steelnet.service.util
 
 import java.util.*
 
-class PathVariableSanitizer {
+class PathVariableSanitizer : PathVariableSanitizerInterface {
 
     companion object {
-        public fun sanitizePathVariable(pathVariable: String): String {
+        fun sanitizePathVariable(pathVariable: String): String {
             return pathVariable.replace("~", "´").replace("_", " ").replace(".", "`").lowercase(Locale.getDefault())
         }
     }

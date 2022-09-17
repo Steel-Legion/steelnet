@@ -1,4 +1,4 @@
-package org.legion.steel.steelnet.service
+package org.legion.steel.steelnet.service.util
 
 import org.legion.steel.steelnet.service.google.sheets.GoogleTokenSheetService
 import org.springframework.beans.factory.annotation.Autowired
@@ -7,22 +7,22 @@ import org.springframework.stereotype.Component
 @Component
 class TokenValidator(
     @Autowired private var googleTokenSheetService: GoogleTokenSheetService
-) {
+) : TokenValidatorInterface {
 
-    fun validateToken(unformattedToken: String): Boolean {
+    override fun validateToken(unformattedToken: String): Boolean {
         val formattedToken = this.formatToken(unformattedToken)
         return this.checkFormatCorrect(unformattedToken) && this.tokenInSheet(formattedToken)
     }
 
-    private fun checkFormatCorrect(unformattedToken: String): Boolean {
+    override fun checkFormatCorrect(unformattedToken: String): Boolean {
         return unformattedToken.startsWith("Bearer ")
     }
 
-    private fun formatToken(unformattedToken: String): String {
+    override fun formatToken(unformattedToken: String): String {
         return unformattedToken.replace("Bearer ", "").trim()
     }
 
-    private fun tokenInSheet(formattedToken: String): Boolean {
+    override fun tokenInSheet(formattedToken: String): Boolean {
         return this.googleTokenSheetService.getTokenList().contains(formattedToken)
     }
 }

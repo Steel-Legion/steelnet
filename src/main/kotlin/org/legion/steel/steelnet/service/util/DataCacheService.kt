@@ -12,22 +12,22 @@ class DataCacheService(
     @Autowired private var googleSheetsResolver: GoogleSheetsResolver,
     @Autowired private var googleTokenSheetService: GoogleTokenSheetService,
     @Autowired private var googleConfiguration: GoogleConfiguration
-) {
+) : DataCacheServiceInterface {
 
     init {
         this.googleTokenSheetService.checkForUpdatesEveryXHours(this.googleConfiguration.getCycle())
         this.googleSheetsResolver.checkForUpdatesEveryXHours(this.googleConfiguration.getCycle())
     }
 
-    public fun getTokens(): List<String> {
+    override fun getTokens(): List<String> {
         return this.googleTokenSheetService.getTokenList()
     }
 
-    public fun getSheetsData(): HashMap<String?, ItemDTOInterface> {
+    override fun getSheetsData(): HashMap<String?, ItemDTOInterface> {
         return this.googleSheetsResolver.getStoredSheetsData()
     }
 
-    public fun getPossibleKeys(): List<String> {
+    override fun getPossibleKeys(): List<String> {
         return this.googleSheetsResolver.getPossibleKeys()
     }
 }
