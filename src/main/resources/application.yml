@@ -9,6 +9,8 @@ logging:
     root: INFO
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   data:
     mongodb:
       database: "foxhole_items"
@@ -29,9 +31,17 @@ springdoc:
     operations-sorter: method
 
 service:
+
+  caching:
+    inital_capacity: 1000
+    maximum_size: 10000
+    expire_after_write: 4
+
   google:
     cycle: 2
     id: "1d9Ti9PxdcqeHPGnOejWWeYdTX-YdREpmeg1uBPROZfw"
     tokenid: "1YS4NRGxhuWNWqjmnA7A-rtPxAy0RXJuw_SXrbkZHI3g"
     name: "SteelNet"
     tokens: "/home/tilman/IdeaProjects/steelnet/src/main/resources/tokens"
+  information:
+    api_list: ['https://war-service-live.foxholeservices.com/api', 'https://war-service-live.foxholeservices.com/api']
